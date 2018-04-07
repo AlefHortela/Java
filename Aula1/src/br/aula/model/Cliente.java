@@ -27,6 +27,8 @@ public class Cliente
     @Transient
     private int idade;
     
+    private String email;
+    
     @Lob
     private String conteudo;
 
@@ -88,5 +90,21 @@ public class Cliente
     public void setConteudo(String conteudo)
     {
         this.conteudo = conteudo;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail()
+    {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 }

@@ -26,7 +26,7 @@ public class IncluindoCliente
         cliente.setNome("napoleao bonaparte");
         cliente.setDataNascimento(new Date());
         cliente.setEndereco("bauru");
-
+        cliente.setEmail("Teste de Email");
         Transaction t = s.beginTransaction();
         s.save(cliente);
         t.commit();

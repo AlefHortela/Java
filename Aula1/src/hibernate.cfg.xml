@@ -4,7 +4,7 @@
 <hibernate-configuration>
 	<session-factory>
             <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-            <property name="connection.url">jdbc:hsqldb:hsql://192.168.5.176/</property>
+            <property name="connection.url">jdbc:hsqldb:hsql://localhost/</property>
             <property name="connection.username">sa</property>
             <property name="connection.password"></property>
             
@@ -12,7 +12,7 @@
             
             <property name="hibernate.show_sql">true</property>
             <property name="hibernate.format_sql">true</property>
-            <property name="hibernate.hbm2ddl.auto">false</property>
+            <property name="hibernate.hbm2ddl.auto">update</property>
             
             <!-- configuration pool via c3p0-->
             <property name="hibernate.c3p0.min_size">5</property>
@@ -21,8 +21,11 @@
             <property name="hibernate.c3p0.idle_test_period">100</property>
             <property name="hibernate.c3p0.preferredTestQuery">Select 1;</property>
             
-            <property name="hibernate.hbm2ddl.auto">update</property>
-            
             <mapping class="br.aula.model.Cliente" />
+            <mapping class="br.aula.model.Autor" />
+            <mapping class="br.aula.model.Emprestimo" />
+            <mapping class="br.aula.model.Livro" />
+            <mapping class="br.aula.model.Review" />
+            <mapping class="br.aula.model.Usuario" />
         </session-factory>
 </hibernate-configuration>
