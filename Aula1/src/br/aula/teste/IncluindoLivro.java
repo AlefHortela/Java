@@ -2,23 +2,24 @@ package br.aula.teste;
 
 import br.aula.db.HibernateFactory;
 import br.aula.model.Autor;
-import java.util.Date;
+import br.aula.model.Livro;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class IncluindoAutor
+public class IncluindoLivro
 {
-
     public static void main(String[] args)
     {
         Session s = HibernateFactory
                 .configureSessionFactory()
                 .openSession();
 
-        Autor autor = new Autor();
-        autor.setNome("Macedonia");
+        Livro livro = new Livro();
+        livro.setTitulo("O livro 2");
+        Autor autor = (Autor) s.get(Autor.class, 2l);
+        livro.setAutor(autor);
         Transaction t = s.beginTransaction();
-        s.save(autor);
+        s.save(livro);
         t.commit();
     }
 }
