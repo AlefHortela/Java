@@ -10,6 +10,6 @@ public class GeraBanco {
 		configuration.configure();
 
 		SchemaExport se = new SchemaExport(configuration);
-		se.create(true, false);
+		se.create(true, false); 
 	}
 }
