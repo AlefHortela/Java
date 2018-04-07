@@ -1,5 +1,7 @@
 package br.aula.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,9 @@ public class Autor
     @Column(name = "nome", nullable = true, length = 45)
     private String nome;
 
+    @OneToMany(mappedBy = "autor")
+    private List<Livro> livros = new ArrayList<>();
+    
     public Long getIdAutor()
     {
         return idAutor;
@@ -32,6 +37,16 @@ public class Autor
     public void setNome(String nome)
     {
         this.nome = nome;
+    }
+
+    public List<Livro> getLivros()
+    {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros)
+    {
+        this.livros = livros;
     }
     
 }

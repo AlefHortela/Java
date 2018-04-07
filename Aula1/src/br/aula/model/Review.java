@@ -17,6 +17,12 @@ public class Review
     @Column(name = "comentario", nullable = true, length = 45) 
     private String comentario;
 
+    @ManyToOne
+    private Livro livro;
+    
+    @ManyToOne
+    private Usuario usuario;
+    
     public Long getIdAvalicao()
     {
         return idAvaliacao;
@@ -45,5 +51,25 @@ public class Review
     public void setComentario(String comentario)
     {
         this.comentario = comentario;
+    }
+
+    public Livro getLivro()
+    {
+        return livro;
+    }
+
+    public void setLivro(Livro livro)
+    {
+        this.livro = livro;
+    }
+
+    public Usuario getUsuario()
+    {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario)
+    {
+        this.usuario = usuario;
     }
 }

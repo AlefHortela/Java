@@ -20,6 +20,12 @@ public class Emprestimo
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_devolucao")
     private Date dataDevolucao;
+    
+    @ManyToOne
+    private Usuario usuario;
+    
+    @ManyToOne
+    private Livro livro;
 
     public Long getIdEmprestimo()
     {
@@ -49,5 +55,25 @@ public class Emprestimo
     public void setDataDevolucao(Date dataDevolucao)
     {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public Usuario getUsuario()
+    {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario)
+    {
+        this.usuario = usuario;
+    }
+
+    public Livro getLivro()
+    {
+        return livro;
+    }
+
+    public void setLivro(Livro livro)
+    {
+        this.livro = livro;
     }
 }

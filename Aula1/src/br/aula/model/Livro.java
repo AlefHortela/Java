@@ -1,5 +1,7 @@
 package br.aula.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,15 @@ public class Livro
     @Column(name = "quantidade")
     private int quantidade;
 
+    @ManyToOne
+    private Autor autor;
+    
+    @OneToMany(mappedBy = "livro")
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "livro")
+    private List<Review> reviews = new ArrayList<>();
+    
     public Long getIdLivro()
     {
         return idLivro;
@@ -58,5 +69,15 @@ public class Livro
     public void setQuantidade(int quantidade)
     {
         this.quantidade = quantidade;
+    }
+
+    public Autor getAutor()
+    {
+        return autor;
+    }
+
+    public void setAutor(Autor autor)
+    {
+        this.autor = autor;
     }
 }

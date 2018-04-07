@@ -1,5 +1,7 @@
 package br.aula.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,12 @@ public class Usuario
     @Column(name = "password", nullable = true, length = 45)
     private String senha;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "usuario")
+    private List<Review> reviews = new ArrayList<>();
+    
     public Long getId()
     {
         return id;
@@ -58,5 +66,15 @@ public class Usuario
     public void setSenha(String senha)
     {
         this.senha = senha;
+    }
+
+    public List<Emprestimo> getEmprestimos()
+    {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos)
+    {
+        this.emprestimos = emprestimos;
     }
 }
