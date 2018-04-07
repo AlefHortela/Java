@@ -23,6 +23,6 @@
             
             <property name="hibernate.hbm2ddl.auto">update</property>
             
-            <mapping class="br.cubas.modelo.Cliente" />
+            <mapping class="br.aula.model.Cliente" />
         </session-factory>
 </hibernate-configuration>
