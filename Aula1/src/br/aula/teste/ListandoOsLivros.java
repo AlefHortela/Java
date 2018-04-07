@@ -15,7 +15,7 @@ public class ListandoOsLivros
                         .configureSessionFactory()
                         .openSession();
         
-        //Todos os livros
+        //Todos os livros sem where
         Query query = s.createQuery("from Livro");
         //Livros com where;
         //Query query = s.createQuery("from Livro l where l.autor.id = :id ");
