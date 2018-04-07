@@ -24,9 +24,9 @@ public class IncluindoUsuario
                 .openSession();
 
         Usuario usuario = new Usuario();
-        usuario.setUsuario("A Grande Familia");
-        usuario.setSenha("Essa Familia é muito unida");
-        usuario.setEmail("E tambem muito ouriçada");
+        usuario.setUsuario("Alef");
+        usuario.setSenha("Alef");
+        usuario.setEmail("alef");
         Transaction t = s.beginTransaction();
         s.save(usuario);
         t.commit();

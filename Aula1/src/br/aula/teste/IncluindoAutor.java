@@ -16,7 +16,7 @@ public class IncluindoAutor
                 .openSession();
 
         Autor autor = new Autor();
-        autor.setNome("Autoria");
+        autor.setNome("Mongol");
         Transaction t = s.beginTransaction();
         s.save(autor);
         t.commit();
