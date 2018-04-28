@@ -1,43 +1,83 @@
 package br.biblioteca.livros.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
 @Entity
-public class Livro {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	private String nome;
-	
-	private int quantidadePaginas;
+@Table(name = "Livro")
+public class Livro
+{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long idLivro;
+    
+    @Column(name = "titulo", nullable = true, length = 45)
+    private String titulo;
+    
+    @Column(name = "foto", nullable = true, length = 200)
+    private String foto;
+    
+    @Column(name = "quantidade")
+    private int quantidade;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    private Autor autor;
+    
+    @OneToMany(mappedBy = "livro")
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "livro")
+    private List<Review> reviews = new ArrayList<>();
+    
+    public Long getIdLivro()
+    {
+        return idLivro;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setIdLivro(Long idLivro)
+    {
+        this.idLivro = idLivro;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getTitulo()
+    {
+        return titulo;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setTitulo(String titulo)
+    {
+        this.titulo = titulo;
+    }
 
-	public int getQuantidadePaginas() {
-		return quantidadePaginas;
-	}
+    public String getFoto()
+    {
+        return foto;
+    }
 
-	public void setQuantidadePaginas(int quantidadePaginas) {
-		this.quantidadePaginas = quantidadePaginas;
-	}
+    public void setFoto(String foto)
+    {
+        this.foto = foto;
+    }
 
-	@Override
-	public String toString() {
-		return "Livro [id=" + id + ", nome=" + nome + ", quantidadePaginas=" + quantidadePaginas + "]";
-	}
+    public int getQuantidade()
+    {
+        return quantidade;
+    }
 
+    public void setQuantidade(int quantidade)
+    {
+        this.quantidade = quantidade;
+    }
+
+    public Autor getAutor()
+    {
+        return autor;
+    }
+
+    public void setAutor(Autor autor)
+    {
+        this.autor = autor;
+    }
 }
