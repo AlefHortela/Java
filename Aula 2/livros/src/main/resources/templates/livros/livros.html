@@ -10,6 +10,8 @@
                 <tr>
                     <td>ID</td>
                     <td>Título</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +24,13 @@
                     <td>
                         <a href="#" th:href="@{'/livros/'+${livro.idLivro}}" th:text="${livro.titulo}"> Título </a>
                     </td>
+                    <td>
+                        <a href="#" th:href="@{'/livros/alterar/'+${livro.idLivro}}" > Altera </a>
+                    </td>				
+                    <td>
+                        <a href="#" th:href="@{'/livros/excluir/'+${livro.idLivro}}" > Excluir </a>
+                    </td>
+
                 </tr>
             </tbody>
         </table>

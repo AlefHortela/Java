@@ -16,4 +16,21 @@ public class LivroService
     {
         return livroRepository.findAll();
     }
+    
+    public Livro save(Livro livro)
+    {
+        return livroRepository.save(livro);
+    }
+    
+    public void delete(Livro livro)
+    {
+        livroRepository.delete(livro);
+    }
+    
+    public Livro findOne(long id)
+    {
+        return livroRepository.findOne(id);
+    }
+    
+    
 }
