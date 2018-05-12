@@ -3,6 +3,8 @@ package br.biblioteca.livros.beans;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +23,13 @@ public class Livro {
 	@NotNull(message = "Quantidade não pode ser vazio")
 	@Min(value = 10, message = "Quantidade mínima de paginas é 10")
 	private int quantidadePaginas;
+	
+	public String capa; 
+	
+	@ManyToOne
+	@JoinColumn(name = "autor_id")
+	private Autor autor;
+
 
 	public Long getId() {
 		return id;
@@ -45,6 +54,24 @@ public class Livro {
 	public void setQuantidadePaginas(int quantidadePaginas) {
 		this.quantidadePaginas = quantidadePaginas;
 	}
+	
+	public String getCapa() {
+		return capa;
+	}
+
+	public void setCapa(String capa) {
+		this.capa = capa;
+	}
+	
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+
 
 	@Override
 	public String toString() {
