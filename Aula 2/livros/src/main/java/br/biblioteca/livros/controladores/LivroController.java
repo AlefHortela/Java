@@ -38,13 +38,12 @@ public class LivroController
         return new ModelAndView("livros/form");
     }
 
-    @PostMapping(path = "/gravar", params = "idLivro, titulo, quantidade, autor")
-    public ModelAndView create(Livro livro)
-    {
-        System.out.println("teste");
+    @PostMapping(value = "/gravar")
+    public ModelAndView create(Livro livro) {
         livro = livroService.save(livro);
-        return new ModelAndView("redirect:/livros/list");
+	return new ModelAndView("redirect:/livros/list");
     }
+
 
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") Long id)
