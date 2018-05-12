@@ -15,11 +15,18 @@ public class LivroService {
 	LivroRepository livroRepository;
 	
 	public List<Livro> listaLivros(){
-		return livroRepository.findAll();
+            return livroRepository.findAll();
 	}
 
 	public Livro salvaLivro(Livro livro) {
-		return livroRepository.save(livro);
+            return livroRepository.save(livro);
 	}
 
+    public Livro buscaLivro(long id){
+    	return livroRepository.findOne(id);
+    }
+    
+    public void excluir(Livro livro){
+    	livroRepository.delete(livro);    	
+    }
 }
