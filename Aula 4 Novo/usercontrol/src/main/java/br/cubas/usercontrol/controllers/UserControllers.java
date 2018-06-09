@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.cubas.usercontrol.beans.Role;
 import br.cubas.usercontrol.beans.User;
 import br.cubas.usercontrol.services.SecurityService;
 import br.cubas.usercontrol.services.UserService;
 import br.cubas.usercontrol.validator.LoginValidator;
 import br.cubas.usercontrol.validator.UserValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -86,7 +88,7 @@ public class UserControllers {
 		}
 
 		String password = userForm.getPassword();
-
+		
 		userService.save(userForm);
 
 		try {
