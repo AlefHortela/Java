@@ -54,6 +54,10 @@ public class LivroController {
 		ModelAndView modelAndView = new ModelAndView("livros/form");
 		Iterable<Autor> autores = autorService.pegarTodos();
 		modelAndView.addObject("autores", autores);
+		for(Autor autor:autores) 
+		{
+			System.out.Println("Autor:" + autor.nome);
+		}
 		return modelAndView;
 	}
 
