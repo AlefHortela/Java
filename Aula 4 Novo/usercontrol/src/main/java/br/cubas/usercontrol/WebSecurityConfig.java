@@ -30,6 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/user/registration").permitAll()
 		.antMatchers(HttpMethod.POST, "/user/registration").permitAll()
 		.antMatchers(HttpMethod.GET, "/user/list").hasRole("BASIC")
+		.antMatchers(HttpMethod.GET, "/livros/list").hasRole("BASIC")
+		.antMatchers(HttpMethod.GET, "/livros/novo").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/livros/gravar").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/livros/excluir/{id}").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/livros/alterar/{id}").hasRole("BASIC")
+		.antMatchers(HttpMethod.GET, "/livros/exibir/{id}").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/autores/list").hasRole("BASIC")
+		.antMatchers(HttpMethod.GET, "/autores/novo").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/autores/gravar").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/autores/excluir/{id}").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/autores/alterar/{id}").hasRole("BASIC")
+		.antMatchers(HttpMethod.GET, "/autores/exibir/{id}").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET, "/user/listadmin").hasRole("ADMIN").and().formLogin()
 		.loginPage("/user/login").permitAll().and().logout().permitAll();
 	}

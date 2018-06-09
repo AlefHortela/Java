@@ -3,11 +3,22 @@ package br.cubas.usercontrol.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class User {
 
+	@Id
 	private String username;
 
+	@NotNull
 	private String password;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Emprestimo> emprestimo = new ArrayList<>(); 
 	
 	public User() { }
 
@@ -15,7 +26,8 @@ public class User {
 		this.username = username;
 		this.password = password;
 	}
-
+	
+	@OneToMany(mappedBy = "user")
 	private List<Role> roles = new ArrayList<>();
 
 	public String getUsername() {
@@ -45,6 +57,14 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", roles=" + roles + "]";
+	}
+	
+	public List<Emprestimo> getEmprestimo() {
+		return emprestimo;
+	}
+
+	public void setEmprestimo(List<Emprestimo> emprestimo) {
+		this.emprestimo = emprestimo;
 	}
 
 

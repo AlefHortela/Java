@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Autor {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -20,7 +20,7 @@ public class Autor {
 	@NotNull
 	@Size(min = 4, max = 100)
 	private String nome;
-	
+
 	@OneToMany(mappedBy = "autor")
 	private List<Livro> livro = new ArrayList<>();
 
@@ -46,8 +46,6 @@ public class Autor {
 
 	public void setLivro(List<Livro> livro) {
 		this.livro = livro;
-	}	
-	
-	
+	}
 
 }

@@ -19,55 +19,70 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.cubas.usercontrol.beans.Autor;
 import br.cubas.usercontrol.beans.Livro;
-import br.cubas.usercontrol.repository.AutorRepository;
+import br.cubas.usercontrol.services.AutorService;
 import br.cubas.usercontrol.services.LivroService;
+import br.cubas.usercontrol.services.SecurityService;
+import br.cubas.usercontrol.services.UserService;
 import br.cubas.usercontrol.util.FileSaver;
-
-
+import br.cubas.usercontrol.validator.LoginValidator;
+import br.cubas.usercontrol.validator.UserValidator;
 
 @Controller
 @RequestMapping(LivroController.PATH_LIVRO)
 public class LivroController {
-	
+
 	public static final String PATH_LIVRO = "/livros";
 	public static final String PATH_LIVRO_LIST = "/list";
 	public static final String PATH_LIVRO_NOVO = "/novo";
 	public static final String PATH_LIVRO_GRAVAR = "/gravar";
 	public static final String PATH_LIVRO_EXCLUIR = "/excluir/{id}";
 	public static final String PATH_LIVRO_UPDATE = "/alterar/{id}";
-	
+	public static final String PATH_LIVRO_EXIBIR = "/exibir/{id}";
+
 	@Autowired
 	LivroService livroService;
-	
+
+	@Autowired
+	AutorService autorService;
+
 	@Autowired
 	FileSaver fileSaver;
 	
 	@Autowired
-	private AutorRepository autorRepository;
-	
+	private SecurityService securityService;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserValidator userValidator;
+
+	@Autowired
+	private LoginValidator loginValidator;
+
 	@RequestMapping("/")
-	public ModelAndView  home() {
+	public ModelAndView home() {
 		return new ModelAndView("index");
 	}
-	
+
 	@RequestMapping(PATH_LIVRO_LIST)
 	public ModelAndView livros() {
 		List<Livro> livros = livroService.listaLivros();
 		return new ModelAndView("livros/livros", "livros", livros);
 	}
-	
+
 	@GetMapping(PATH_LIVRO_NOVO)
 	public ModelAndView createForm(@ModelAttribute Livro livro) {
 		ModelAndView modelAndView = new ModelAndView("livros/form");
-		Iterable<Autor> autores = autorRepository.findAll();
+		Iterable<Autor> autores = autorService.listaAutores();
 		modelAndView.addObject("autores", autores);
 		return modelAndView;
 	}
 
-	
 	@PostMapping(value = PATH_LIVRO_GRAVAR)
-	public ModelAndView create(@RequestParam("fotoUrl") MultipartFile fotoUrl, @ModelAttribute("livro") @Valid Livro livro, BindingResult bindingResult, Model model) {
-		
+	public ModelAndView create(@RequestParam("fotoUrl") MultipartFile fotoUrl,
+			@ModelAttribute("livro") @Valid Livro livro, BindingResult bindingResult, Model model) {
+
 		if (livro.getId() != null) {
 			if (fotoUrl.getOriginalFilename().length() > 0) {
 				incluiFoto(fotoUrl, livro, model);
@@ -79,32 +94,42 @@ public class LivroController {
 				incluiFoto(fotoUrl, livro, model);
 			}
 		}
-			
-		if (bindingResult.hasErrors()  || model.containsAttribute("message")) {
-			Iterable<Autor> autores = autorRepository.findAll();
+
+		if (bindingResult.hasErrors() || model.containsAttribute("message")) {
+			Iterable<Autor> autores = autorService.listaAutores();
 			return new ModelAndView("livros/form", "autores", autores);
 		}
-		
+
 		livro = livroService.salvaLivro(livro);
-	   	return new ModelAndView("redirect:/livros/list");
+		return new ModelAndView("redirect:/livros/list");
 	}
-	
+
 	@GetMapping(PATH_LIVRO_UPDATE)
 	public ModelAndView alterar(@PathVariable("id") Long id) {
 		Livro livro = this.livroService.buscaLivro(id);
-		Iterable<Autor> autores = autorRepository.findAll();
+		Iterable<Autor> autores = autorService.listaAutores();
 		ModelAndView modelAndView = new ModelAndView("livros/form");
 		modelAndView.addObject("autores", autores);
-		modelAndView.addObject("livros", livro);
+		modelAndView.addObject("livro", livro);
 		return modelAndView;
 	}
-	
+
 	@GetMapping(PATH_LIVRO_EXCLUIR)
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		this.livroService.apagaLivro(id);
 		return new ModelAndView("redirect:/livros/list");
 	}
 	
+	@GetMapping(PATH_LIVRO_EXIBIR)
+	public ModelAndView exibir(@PathVariable("id") Long id) {
+		Livro livro = this.livroService.buscaLivro(id);
+		Autor autor = this.livroService.buscaLivro(id).getAutor();
+		ModelAndView modelAndView = new ModelAndView("livros/exibir");
+		modelAndView.addObject("livro", livro);
+		modelAndView.addObject("autor", autor);
+		return modelAndView;
+	}
+
 	private void incluiFoto(MultipartFile fotoUrl, Livro livro, Model model) {
 		if (fotoUrl.getContentType().equals("image/jpeg")) {
 			String webPath = fileSaver.write("uploaded-images", fotoUrl);

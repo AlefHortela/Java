@@ -3,9 +3,10 @@ package br.cubas.usercontrol.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.cubas.usercontrol.beans.Autor;
+import br.cubas.usercontrol.beans.Emprestimo;
+
 
 @Repository
-public interface AutorRepository extends JpaRepository<Autor, Long> {
+public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
 
 }

@@ -56,7 +56,7 @@ public class UserControllers {
 		}
 
 		securityService.login(userForm.getUsername(), userForm.getPassword());
-		return new ModelAndView("redirect:/user/list");
+		return new ModelAndView("redirect:/livros/list");
 	}
 
 	@GetMapping("/list")

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import br.cubas.usercontrol.beans.Livro;
 
+
 @Repository
 public interface LivroRepository extends JpaRepository <Livro, Long>  {
 
